@@ -7,11 +7,8 @@ import makeCard from './make-card';
  * @enum {number}
  */
 const Numbers = {
-  /** Кол-во основных карточек для изначальной отрисовки*/
   DEFAULT_CARDS: 7,
-  /** Кол-во экстра-карточек для изначальной отрисовки */
   DEFAULT_EXTRA_CARDS: 2,
-  /** Максимальное кол-во карточек для слуйчайно генерации */
   MAX_CARDS: 10
 };
 
@@ -21,15 +18,12 @@ const Numbers = {
  */
 const getRandomNumber = (max) => Math.floor(Math.random() * max);
 
-/** Коллекция контейнеров для отрисовки карточек */
 const cardContainers = document.querySelectorAll(`.films-list__container`);
 
 /** Удаляет все карточки из всех контейнеров */
 const clearCardContainers = () => {
   cardContainers.forEach((item) => {
-    while (item.lastElementChild) {
-      item.removeChild(item.lastElementChild);
-    }
+    item.innerHTML = ``;
   });
 };
 
@@ -44,7 +38,6 @@ const renderCards = (containerIndex, quantity, noControls) => {
   }
 };
 
-/** Контейнер для отрисовки фильтров */
 const filterContainer = document.querySelector(`.main-navigation`);
 
 filterContainer.insertAdjacentHTML(`beforeend`, makeFilter(`All movies`, 0, true));
