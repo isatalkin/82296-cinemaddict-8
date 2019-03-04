@@ -1,5 +1,6 @@
 import makeFilter from './make-filter';
 import makeCard from './make-card';
+import getData from './data';
 
 /**
  * Перечисление используемых констант.
@@ -30,11 +31,16 @@ const clearCardContainers = () => {
 /** Рендерит карточки в заданный контейнер
  * @param {number} containerIndex - индекс контейнера в коллекции контейнеров
  * @param {number} quantity - кол-во карточек для рендера
- * @param {boolean} noControls - наличие контролов у карточек
+ * @param {boolean} hasControls - наличие контролов у карточек
  */
-const renderCards = (containerIndex, quantity, noControls) => {
+const renderCards = (containerIndex, quantity, hasControls = true) => {
+  cardContainers[containerIndex].innerHTML = ``;
+  const cards = [];
   for (let i = 0; i < quantity; i++) {
-    cardContainers[containerIndex].insertAdjacentHTML(`beforeend`, makeCard(noControls));
+    const data = getData();
+    data.hasControls = hasControls;
+    cards.push(data);
+    cardContainers[containerIndex].insertAdjacentHTML(`beforeend`, makeCard(data));
   }
 };
 
